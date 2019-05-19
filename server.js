@@ -20,7 +20,7 @@ app.get('/api/top100', (req, response) => {
 
     let url = 'https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json'
 
-    client.hget("top100", url, function (err, obj) {
+    client.get(url, function (err, obj) {
 
         if (obj == null) {
             
@@ -35,7 +35,8 @@ app.get('/api/top100', (req, response) => {
                 res.on('end', function(){
                     var json = JSON.parse(body);
 
-                    client.hset("top100", url, JSON.stringify(json))
+                    client.set(url, JSON.stringify(json))
+                    client.expireat(url, parseInt((+new Date)/1000) + 86400);
 
                     response.send(json);
                 });
@@ -61,7 +62,7 @@ app.get('/api/lookup', (req, response) => {
 
     let url = 'https://itunes.apple.com/hk/lookup?id=' + req.query.id
 
-    client.hget("lookup", url, function (err, obj) {
+    client.get(url, function (err, obj) {
 
         if (obj == null) {
             
@@ -76,7 +77,8 @@ app.get('/api/lookup', (req, response) => {
                 res.on('end', function(){
                     var json = JSON.parse(body);
 
-                    client.hset("lookup", url, JSON.stringify(json))
+                    client.set(url, JSON.stringify(json))
+                    client.expireat(url, parseInt((+new Date)/1000) + 86400);
 
                     response.send(json);
                 });
@@ -99,7 +101,7 @@ app.get('/api/top10', (req, response) => {
 
     let url = 'https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json'
 
-    client.hget("top10", url, function (err, obj) {
+    client.get(url, function (err, obj) {
 
         if (obj == null) {
             
@@ -114,7 +116,8 @@ app.get('/api/top10', (req, response) => {
                 res.on('end', function(){
                     var json = JSON.parse(body);
 
-                    client.hset("top10", url, JSON.stringify(json))
+                    client.set(url, JSON.stringify(json))
+                    client.expireat(url, parseInt((+new Date)/1000) + 86400);
 
                     response.send(json);
                 });
