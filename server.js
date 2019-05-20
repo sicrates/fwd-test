@@ -4,7 +4,6 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const https = require('https')
-const u = require('url')
 
 const redis = require("redis"),
     client = redis.createClient();
@@ -55,12 +54,9 @@ app.get('/api/top100', (req, response) => {
 
 });
 
-app.get('/api/lookup', (req, response) => {
+app.get('/api/lookup/:id', (req, response) => {  
 
-    var parts = u.parse(req.url, true);
-    var query = parts.query;
-
-    let url = 'https://itunes.apple.com/hk/lookup?id=' + req.query.id
+    let url = 'https://itunes.apple.com/hk/lookup?id=' + req.params.id
 
     client.get(url, function (err, obj) {
 
@@ -136,4 +132,4 @@ app.get('/api/top10', (req, response) => {
 
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port);

@@ -25,7 +25,7 @@ class network {
     _lookup = async (app_id) => {
 
         //let url = 'https://itunes.apple.com/hk/lookup?id=' + app_id
-        let url = '/api/lookup/?id=' + app_id
+        let url = '/api/lookup/' + app_id
 
         console.log( url )
         

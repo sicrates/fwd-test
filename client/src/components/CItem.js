@@ -24,9 +24,9 @@ export class CItem extends Component {
         let stars = []
         for (let i = 0; i <= 4; i++){
             if(i<this.state.averageUserRating)
-                stars.push(<span class="fa fa-star checked"></span>)
+                stars.push(<span className="fa fa-star checked" key={i}></span>)
             else
-                stars.push(<span class="fa fa-star"></span>)
+                stars.push(<span className="fa fa-star" key={i}></span>)
         }
         return stars
     }
