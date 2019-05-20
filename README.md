@@ -10,6 +10,17 @@ redis-server
 cd fwd-test
 yarn start
 ```
+
+To test:
+```
+redis-server
+```
+```
+cd fwd-test
+yarn server-test
+yarn client-test
+```
+
 Important!
 1. required [Redis](https://redis.io/) at local
 2. required [Nodejs](https://nodejs.org/en/)
@@ -29,3 +40,6 @@ Some notes:
 3. DB (Redis)
 - at ./server.js
 - each url is as a key for caching, expire after 24hr
+4. Jest
+- server test on each API call
+- client test on render components
